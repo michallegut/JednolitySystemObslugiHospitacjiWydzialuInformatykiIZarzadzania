@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Jednolity System Obsługi Hospitacji Wydziału Informatyki i Zarządzania</title>
+    <link rel="stylesheet" href="../styles/style.css" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="obscurer" class="hidden"></div>
+<div class="container">
+    <h1 class="indexHeader">Jednolity System Obsługi Hospitacji Wydziału Informatyki i Zarządzania</h1>
+    <form method="post">
+        <div id="message" class="hidden">
+            <h1>Hospitacja została dodana.</h1>
+            <input class="zatwierdzanieSzczegolyButton" name="cofnij" type="submit" value="OK"/>
+        </div>
+    </form>
+    <div id="error" class="hidden">
+        <h1>Ktoś musi specjalizować się w dziedzinie kursu.</h1>
+        <input class="zatwierdzanieSzczegolyButton" id="errorbutton" onclick="error()" type="submit" value="OK"/>
+    </div>
+    <div id="error1" class="hidden">
+        <h1>Komisja musi mieć przynajmniej dwóch członków.</h1>
+        <input class="zatwierdzanieSzczegolyButton" id="error1button" onclick="error1()" type="submit" value="OK"/>
+    </div>
+    <h1 id="komisjaHeader" th:utext="${'Kurs: ' + kurs.nazwa + ' | Dziedzina: ' + kurs.dziedzina}"></h1>
+    <div id="przewodniczacyRadio">
+        <h1>Przewodniczący</h1>
+        <div class="komisjaCheckboxList">
+            <div class="komisjaRadioElement" th:each="p : ${przewodniczacyDTOS}">
+                <form action="#" th:action="@{/opracowywanie/komisja} + ${{p.id}}" method="post">
+                    <input th:id="${'1' + p.id}" th:classappend="${p.id == przewodniczacy} ? selected : notselected"
+                           type="submit"
+                           th:value="${p.stopienNaukowy + ' ' + p.imie + ' ' + p.nazwisko + ' | Obciążenie: ' + p.obciazenie}"/>
+                    <label th:classappend="${p.id == przewodniczacy} ? selected : notselected" th:for="${'1' + p.id}">|
+                        <span th:each="s : ${p.specjalizacje}" th:text="${s + ' | '}"></span></label>
+                </form>
+            </div>
+        </div>
+    </div>
+    <form name="hospitujacy" method="post">
+        <div th:classappend="${przewodniczacy == null} ? hidden : visible" id="hospitujacyCheckbox">
+            <h1>Hospitujący</h1>
+            <div class="komisjaCheckboxList">
+                <div class="komisjaCheckboxElement" th:each="h : ${hospitujacyDTOS}">
+                    <input name="hospitujacy" th:id="${h.id}" type="checkbox" th:value="${h.id}"/>
+                    <label th:for="${h.id}"
+                           th:utext="${h.stopienNaukowy + ' ' + h.imie + ' ' + h.nazwisko + ' | Obciążenie: ' + h.obciazenie}"></label>
+                    <label th:for="${h.id}">| <span th:each="s : ${h.specjalizacje}"
+                                                    th:text="${s + ' | '}"></span></label>
+                </div>
+            </div>
+        </div>
+    </form>
+    <input th:classappend="${przewodniczacy == null} ? hidden : visible" id="komisjaDodajHospitacjeButton" type="submit"
+           value="Dodaj hospitację"/>
+
+    <script>
+        $(document).ready(function () {
+            $("#komisjaDodajHospitacjeButton").on('click', function () {
+                var hospitujacy = "";
+                $(":checkbox").each(function () {
+                    var ischecked = $(this).is(":checked");
+                    if (ischecked) {
+                        hospitujacy += $(this).val() + " ";
+                    }
+                });
+                $.ajax({
+                    type: 'POST',
+                    url: "/opracowywanie/komisja",
+                    data: JSON.stringify(
+                        hospitujacy
+                    ),
+                    dataType: "json",
+                    contentType: "application/json",
+                    complete: function (response) {
+                        document.getElementById("obscurer").setAttribute("class", "visible");
+                        if (response.responseText == "success") {
+                            document.getElementById("message").setAttribute("class", "visible");
+                        }
+                        else {
+                            if (response.responseText == "error") {
+                                document.getElementById("error").setAttribute("class", "visible");
+                            }
+                            else {
+                                document.getElementById("error1").setAttribute("class", "visible");
+                            }
+                        }
+                    }
+                });
+            });
+        });
+
+        function error() {
+            document.getElementById("error").setAttribute("class", "hidden");
+            document.getElementById("obscurer").setAttribute("class", "hidden");
+        }
+
+        function error1() {
+            document.getElementById("error1").setAttribute("class", "hidden");
+            document.getElementById("obscurer").setAttribute("class", "hidden");
+        }
+    </script>
+
+    <form action="#" th:action="@{/opracowywanie/komisja}" method="post">
+        <input id="komisjaPowrotButton" name="bbb" type="submit" value="Powrót"/>
+    </form>
+</div>
+</body>
+</html>

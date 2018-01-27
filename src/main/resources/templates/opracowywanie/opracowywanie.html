@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Jednolity System Obsługi Hospitacji Wydziału Informatyki i Zarządzania</title>
+    <link rel="stylesheet" href="styles/style.css" type="text/css"/>
+</head>
+<body>
+<div id="obscurer" th:classappend="${message == 'message'} ? visible : hidden"></div>
+<div class="container">
+    <h1 class="indexHeader">Jednolity System Obsługi Hospitacji Wydziału Informatyki i Zarządzania</h1>
+    <form method="post">
+        <div id="message" th:classappend="${message == 'message'} ? visible : hidden">
+            <h1>Plan hospitacji został usunięty.</h1>
+            <input class="zatwierdzanieSzczegolyButton" type="submit" value="OK"/>
+        </div>
+    </form>
+    <div id="opracowywanieKierunekRadio">
+        <h1>Kierunek</h1>
+        <div class="opracowywanieRadioList">
+            <div class="opracowywanieRadioElement" th:each="k : ${kierunekDTOS}">
+                <form action="#" th:action="@{/opracowywanie} + ${{k.id}}" method="post">
+                    <input th:classappend="${k.id == kierunek} ? selected : notselected" type="submit"
+                           th:value="${k.nazwa}"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:classappend="${kierunek == null} ? hidden : visible" id="opracowywanieSemestrRadio">
+        <h1>Semestr</h1>
+        <div class="opracowywanieRadioList">
+            <div class="opracowywanieRadioElement" th:each="s : ${semestrDTOS}">
+                <form action="#"
+                      th:action="@{/opracowywanie{kierunekid}/aktualny{semestrid}(kierunekid=${kierunek},semestrid=${s.id})}"
+                      method="post">
+                    <input class="notselected" type="submit" th:value="${s.rodzaj + ' ' + s.rok}"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <form action="#" th:action="@{/opracowywanie}" method="post">
+        <input id="opracowywanieWyjdzButton" type="submit" value="Wyjdź"/>
+    </form>
+</div>
+</body>
+</html>

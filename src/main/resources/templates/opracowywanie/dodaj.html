@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Jednolity System Obsługi Hospitacji Wydziału Informatyki i Zarządzania</title>
+    <link rel="stylesheet" href="../styles/style.css" type="text/css"/>
+</head>
+<body>
+<div class="container">
+    <h1 class="indexHeader">Jednolity System Obsługi Hospitacji Wydziału Informatyki i Zarządzania</h1>
+    <form method="post">
+    </form>
+    <div id="dodajKursRadio">
+        <h1>Kurs</h1>
+        <div class="opracowywanieRadioList">
+            <div class="opracowywanieRadioElement" th:each="k : ${kursDTOS}">
+                <form action="#" th:action="@{/opracowywanie/dodaj} + ${{k.id}}" method="post">
+                    <input th:classappend="${k.id == kurs} ? selected : notselected" type="submit"
+                           th:value="${k.nazwa}"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:classappend="${kurs == null} ? hidden : visible" id="dodajProwadzacyRadio">
+        <h1>Prowadzący</h1>
+        <div class="komisjaCheckboxList">
+            <div class="komisjaRadioElement" th:each="p : ${prowadzacyDTOS}">
+                <form action="#"
+                      th:action="@{/opracowywanie{prowadzacyid}/dodaj{kursid}(kursid=${kurs}, prowadzacyid=${p.id})}"
+                      method="post">
+                    <input class="notselected" th:id="${p.id}" type="submit"
+                           th:value="${p.stopienNaukowy + ' ' + p.imie + ' ' + p.nazwisko}"/>
+                    <label th:for="${p.id}"><span th:classappend="${p.czyDoktorant == 'Nie'} ? hidden : visible"
+                                                  style="color: red;">Doktorant</span><span
+                            th:classappend="${p.czyDoktorant == 'Tak' and p.czyZUczelni == 'Nie'} ? visible : hidden"
+                            style="color: red;">, </span><span
+                            th:classappend="${p.czyZUczelni == 'Tak'} ? hidden : visible" style="color: red;">Spoza uczelni</span></label>
+                </form>
+            </div>
+        </div>
+    </div>
+    <form action="#" th:action="@{/opracowywanie/dodaj}" method="post">
+        <input id="komisjaPowrotButton" type="submit" value="Powrót"/>
+    </form>
+</div>
+</body>
+</html>

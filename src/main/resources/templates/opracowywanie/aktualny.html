@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Jednolity System Obsługi Hospitacji Wydziału Informatyki i Zarządzania</title>
+    <link rel="stylesheet" href="../styles/style.css" type="text/css"/>
+</head>
+<body>
+<div id="obscurer"
+     th:classappend="${message == 'messagesave' || message == 'messagedelete' || message ==  'messagenotification'} ? visible : hidden"></div>
+<div class="container">
+    <form method="post">
+        <input class="zatwierdzanieSzczegolyButton" id="szczegolyPowrotButton" name="powrot" type="submit"
+               value="Powrót"/>
+        <input class="zatwierdzanieSzczegolyButton" id="szczegolyZatwierdzButton" name="zapisz" type="submit"
+               value="Zapisz"/>
+        <input class="zatwierdzanieSzczegolyButton" id="aktualnyDodajHospitacjeButton" name="dodajhospitacje"
+               type="submit" value="Dodaj hospitację"/>
+        <input class="zatwierdzanieSzczegolyButton" id="aktualnyUsunPlanHospitacjiButton" name="usunplanhospitacji"
+               type="submit" value="Usuń plan hospitacji"/>
+        <div id="message" th:classappend="${message == 'messagedelete'} ? visible : hidden">
+            <h1>Plan hospitacji nie został jeszcze zapisany.</h1>
+            <input class="zatwierdzanieSzczegolyButton" type="submit" value="OK"/>
+        </div>
+        <div id="messagesave" th:classappend="${message == 'messagesave'} ? visible : hidden">
+            <h1>Plan został zapisany.</h1>
+            <input class="zatwierdzanieSzczegolyButton" type="submit" value="OK"/>
+        </div>
+        <div id="messagenotification" th:classappend="${message == 'messagenotification'} ? visible : hidden">
+            <h1>UWAGA: Nie wszyscy nauczyciele spoza uczelni i doktoranci
+                zostali uwzględnieni w planach hospitacji na ten semestr.</h1>
+            <input class="zatwierdzanieSzczegolyButton" type="submit" value="OK"/>
+        </div>
+    </form>
+    <table id="szczegolyFirstRow">
+        <thead>
+        <tr>
+            <th>Kierunek</th>
+            <th>Semestr</th>
+            <th>Rok</th>
+            <th>Data utworzenia</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${planHospitacjiDTO.kierunek.nazwa}"></td>
+            <td th:text="${planHospitacjiDTO.semestr.rodzaj}"></td>
+            <td th:text="${planHospitacjiDTO.semestr.rok}"></td>
+            <td th:text="${planHospitacjiDTO.dataUtworzenia}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="szczegolyOtherRows">
+        <tbody th:each="h : ${planHospitacjiDTO.hospitacje}">
+        <tr class="szczegolyRowWithDivider">
+            <th id="szczegolyHospitacjaRow" colspan="2">Hospitacja</th>
+            <th class="usunHospitacje">
+                <form action="#" th:action="@{/opracowywanie/aktualny} + ${{h.id}}" method="post">
+                    <input type="image" src="../images/trash.png"/>
+                </form>
+            </th>
+        </tr>
+        <tr class="szczegolyRowWithDivider">
+            <th>Prowadzący</th>
+            <th>Kurs</th>
+            <th>Dziedzina kursu</th>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="${h.prowadzacy.stopienNaukowy + ' ' + h.prowadzacy.imie + ' ' + h.prowadzacy.nazwisko}"></span><br/>
+                <span>Z uczelni? </span><span th:classappend="${h.prowadzacy.czyZUczelni == 'Tak'} ? green : red"
+                                              th:text="${h.prowadzacy.czyZUczelni}"></span><br/>
+                <span>Doktorant? </span><span th:classappend="${h.prowadzacy.czyDoktorant == 'Tak'} ? green : red"
+                                              th:text="${h.prowadzacy.czyDoktorant}"></span>
+            </td>
+            <td th:text="${h.kurs.nazwa}"></td>
+            <td th:text="${h.kurs.dziedzina}"></td>
+        </tr>
+        <tr class="szczegolyRowWithDivider">
+            <th>Przewodniczący komisji</th>
+            <th>Specjalizacje</th>
+            <th>Obciazenie</th>
+        </tr>
+        <tr>
+            <td th:text="${h.komisjaHospitacyjna.przewodniczacy.stopienNaukowy + ' ' + h.komisjaHospitacyjna.przewodniczacy.imie + ' ' + h.komisjaHospitacyjna.przewodniczacy.nazwisko}"></td>
+            <td>
+                <span th:each="s : ${h.komisjaHospitacyjna.przewodniczacy.specjalizacje}"
+                      th:utext="${s + '&lt;br /&gt;'}"></span>
+            </td>
+            <td th:text="${h.komisjaHospitacyjna.przewodniczacy.obciazenie}"></td>
+        </tr>
+        <tr>
+            <td colspan="3" id="szczegolyCellWithoutPadding">
+                <table>
+                    <tbody th:each="i : ${h.komisjaHospitacyjna.hospitujacy}">
+                    <tr class="szczegolyRowWithDivider">
+                        <th>Hospitujacy</th>
+                        <th>Specjalizacje</th>
+                        <th>Obciazenie</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${i.stopienNaukowy + ' ' + i.imie + ' ' + i.nazwisko}"></td>
+                        <td>
+                            <span th:each="s : ${i.specjalizacje}" th:utext="${s + '&lt;br /&gt;'}"></span>
+                        </td>
+                        <td th:text="${i.obciazenie}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

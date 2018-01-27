@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/jsohwiz</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.GrupazajeciowaEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.HospitacjaEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.KierunekEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.KomisjahospitacyjnaEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.KursEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.KursSemestrEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.NauczycielEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.NauczycielKomisjahospitacyjnaEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.NauczycielKursEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.PlanhospitacjiEntity"/>
+        <mapping class="com.jsohwiz.jsohwiz.dal.entity.SemestrEntity"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

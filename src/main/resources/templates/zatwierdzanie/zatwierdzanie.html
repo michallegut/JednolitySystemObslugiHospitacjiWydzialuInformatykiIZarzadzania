@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Jednolity System Obsługi Hospitacji Wydziału Informatyki i Zarządzania</title>
+    <link rel="stylesheet" href="styles/style.css" type="text/css"/>
+</head>
+<body>
+<div id="obscurer" th:classappend="${message == 'message'} ? visible : hidden"></div>
+<div class="container">
+    <h1 id="zatwierdzanieHeader">Niezaakceptowane plany hospitacji</h1>
+    <form method="post">
+        <input class="zatwierdzanieSzczegolyButton" id="zatwierdzanieWyjdzButton" type="submit" value="Wyjdź"/>
+        <div id="message" th:classappend="${message == 'message'} ? visible : hidden">
+            <h1>Plan hospitacji został zatwierdzony.</h1>
+            <input class="zatwierdzanieSzczegolyButton" type="submit" value="OK"/>
+        </div>
+    </form>
+    <table id="zatwierdzanieTable">
+        <thead>
+        <tr>
+            <th>Kierunek</th>
+            <th>Semestr</th>
+            <th>Rok</th>
+            <th>Data utworzenia</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${planHospitacjiSimpleDTOS}">
+            <form action="#" th:action="@{/zatwierdzanie/szczegoly} + ${{p.id}}" method="post">
+                <td th:text="${p.kierunek.nazwa}"></td>
+                <td th:text="${p.semestr.rodzaj}"></td>
+                <td th:text="${p.semestr.rok}"></td>
+                <td th:text="${p.dataUtworzenia}"></td>
+                <td><input class="zatwierdzanieSzczegolyButton" type="submit" value="Szczegóły"/></td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

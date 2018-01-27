@@ -1,0 +1,521 @@
+body {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: bottom;
+    background-attachment: fixed;
+    margin: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 2vh;
+    padding-left: 0;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    min-height: 94vh;
+    margin-top: 2vh;
+    margin-right: 2vw;
+    margin-left: 2vw;
+    padding-top: 2vh;
+    padding-bottom: 4vh;
+    box-sizing: border-box;
+    border-radius: 2vh;
+    text-align: center;
+}
+
+.indexHeader {
+    background-color: rgb(150, 1, 1);
+    width: 100%;
+    margin: 0;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    color: rgb(255, 255, 255);
+    font-size: 2vw;
+}
+
+.indexButton {
+    cursor: pointer;
+    background-color: rgb(140, 140, 140);
+    display: block;
+    width: 70%;
+    margin-top: 4vh;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;
+    height: 36vh;
+    font-size: 2vw;
+    border-radius: 1vh;
+    border-style: solid;
+    border-width: 0.5vh;
+    border-color: rgb(100, 100, 100);
+}
+
+#zatwierdzanieHeader {
+    width: 100%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 2vh;
+    margin-left: 0;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    font-size: 4vh;
+}
+
+.zatwierdzanieSzczegolyButton {
+    cursor: pointer;
+    position: absolute;
+    top: 1vh;
+    right: 4vw;
+    background-color: rgb(140, 140, 140);
+    display: block;
+    width: 10vw;
+    height: 8vh;
+    margin: 0;
+    font-size: 1.5vw;
+    border-radius: 1vh;
+    border-style: solid;
+    border-width: 0.5vh;
+    border-color: rgb(100, 100, 100);
+}
+
+#zatwierdzanieWyjdzButton, #szczegolyPowrotButton {
+    top: 1.5vh;
+    cursor: pointer;
+    right: 1vw;
+}
+
+#zatwierdzanieTable {
+    margin: 0;
+    width: 100%;
+    border-spacing: 0;
+    font-size: 3vh;
+}
+
+#zatwierdzanieTable thead {
+    display: block;
+    background-color: rgb(150, 1, 1);
+    color: rgb(255, 255, 255);
+    font-size: 4vh;
+}
+
+#zatwierdzanieTable thead th {
+    width: calc(20% - 2px);
+    float: left;
+}
+
+#zatwierdzanieTable tbody {
+    display: block;
+    height: 75vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#zatwierdzanieTable tbody td {
+    position: relative;
+    padding-top: 3.2vh;
+    padding-bottom: 3.2vh;
+    border-top: 0.2vh solid;
+    width: calc(20% - 2px);
+    float: left;
+}
+
+#zatwierdzanieTable tr, #zatwierdzanieTable th, #zatwierdzanieTable td {
+    display: block;
+}
+
+#zatwierdzanieTable thead tr {
+    width: 98.2%;
+}
+
+#zatwierdzanieTable tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+#szczegolyZatwierdzButton {
+    cursor: pointer;
+    position: absolute;
+    top: 1.5vh;
+    left: 1vw;
+}
+
+#szczegolyFirstRow {
+    margin-top: 9vh;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    width: 100%;
+    border-spacing: 0;
+    font-size: 3vh;
+}
+
+#szczegolyFirstRow thead {
+    background-color: rgb(150, 1, 1);
+    color: rgb(255, 255, 255);
+    font-size: 4vh;
+}
+
+#szczegolyFirstRow tbody {
+    background-color: rgb(140, 140, 140);
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.szczegolyOtherRows {
+    margin: 0;
+    width: 100%;
+    border-spacing: 0;
+    font-size: 3vh;
+}
+
+.szczegolyOtherRows td, .szczegolyOtherRows th {
+    padding-top: 1vh;
+    padding-right: 1vw;
+    padding-bottom: 1vh;
+    padding-left: 1vw;
+    vertical-align: text-top;
+    text-align: left;
+    width: 33.3%;
+}
+
+.szczegolyOtherRows table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+.szczegolyRowWithDivider th {
+    border-top: 0.2vh solid;
+}
+
+#szczegolyCellWithoutPadding {
+    padding: 0;
+}
+
+#szczegolyHospitacjaRow {
+    background-color: rgb(200, 200, 200);
+    padding-left: 45vw;
+}
+
+#message, #messagesave, #error, #error1, #messagenotification {
+    background-color: rgb(200, 200, 200);
+    position: absolute;
+    margin: auto;
+    top: 25vh;
+    left: 30vw;
+    height: 40vh;
+    width: 40vw;
+    border-radius: 1vh;
+    border-style: solid;
+    border-width: 0.5vh;
+    border-color: rgb(100, 100, 100);
+    z-index: 99;
+}
+
+#message h1, #messagesave h1, #error h1, #error1 h1 {
+    font-size: 2vw;
+    margin-top: 8vh;
+}
+
+#messagenotification h1 {
+    font-size: 2vw;
+    margin-top: 4vh;
+}
+
+#message input, #messagesave input, #error input, #error1 input, #messagenotification input {
+    background-color: rgb(200, 200, 200);
+    top: 25vh;
+    left: 15vw;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
+#obscurer {
+    position: absolute;
+    width: 100%;
+    height: 98vh;
+    z-index: 98;
+}
+
+#opracowywanieKierunekRadio {
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 14vh;
+    left: 5vw;
+    width: 45vw;
+    border-style: solid;
+    border-width: 0.2vh;
+    overflow-x: hidden;
+}
+
+#opracowywanieSemestrRadio {
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 14vh;
+    right: 5vw;
+    width: 35vw;
+    border-style: solid;
+    border-width: 0.2vh;
+    overflow-x: hidden;
+}
+
+#dodajProwadzacyRadio {
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 14vh;
+    right: 5vw;
+    width: 45vw;
+    border-style: solid;
+    border-width: 0.2vh;
+}
+
+#dodajKursRadio {
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 14vh;
+    left: 5vw;
+    width: 35vw;
+    border-style: solid;
+    border-width: 0.2vh;
+}
+
+#przewodniczacyRadio {
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 14vh;
+    left: 5vw;
+    width: 40vw;
+    border-style: solid;
+    border-width: 0.2vh;
+}
+
+#hospitujacyCheckbox {
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 14vh;
+    right: 5vw;
+    width: 40vw;
+    border-style: solid;
+    border-width: 0.2vh;
+}
+
+#opracowywanieKierunekRadio h1, #opracowywanieSemestrRadio h1, #dodajProwadzacyRadio h1, #dodajKursRadio h1, #przewodniczacyRadio h1, #hospitujacyCheckbox h1 {
+    margin: 0;
+    padding: 1vh;
+    font-size: 1.5vw;
+    text-align: center;
+}
+
+.opracowywanieRadioList {
+    border-top: 0.2vh solid;
+    overflow-y: auto;
+    height: 60vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+}
+
+.opracowywanieRadioElement, .komisjaRadioElement {
+    margin: 0;
+    padding: 0;
+}
+
+.opracowywanieRadioElement input {
+    border-style: none;
+    min-width: 100%;
+    margin: 0;
+    padding: 1vh;
+    font-size: 1.2vw;
+    cursor: pointer;
+    text-align: left;
+}
+
+.opracowywanieRadioElement input:hover, .komisjaRadioElement input:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+.notselected {
+    background-color: rgb(255, 255, 255);
+}
+
+.selected {
+    background-color: rgb(140, 140, 140);
+}
+
+#opracowywanieWyjdzButton {
+    background-color: rgb(200, 200, 200);
+    display: block;
+    position: absolute;
+    bottom: 3vh;
+    right: 5vw;
+    width: 10vw;
+    height: 8vh;
+    border-radius: 0.5vh;
+    border-style: solid;
+    border-width: 0.3vh;
+    border-color: rgb(100, 100, 100);
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+
+#aktualnyUsunPlanHospitacjiButton {
+    cursor: pointer;
+    position: absolute;
+    top: 1.5vh;
+    left: 25vw;
+    width: 15vw;
+}
+
+#aktualnyDodajHospitacjeButton {
+    cursor: pointer;
+    position: absolute;
+    top: 1.5vh;
+    right: 25vw;
+    width: 15vw;
+}
+
+.usunHospitacje {
+    background-color: rgb(200, 200, 200);
+    border-style: none;
+    min-width: 100%;
+    margin: 0;
+    padding: 1vh;
+    font-size: 1.2vw;
+    cursor: pointer;
+    text-align: left;
+}
+
+.usunHospitacje input {
+    float: right;
+    height: 4vh;
+    width: 2vw;
+}
+
+.komisjaCheckboxElement input {
+    display: none;
+}
+
+.komisjaCheckboxElement {
+    margin: 0;
+    padding: 0;
+}
+
+.komisjaCheckboxElement input + label {
+    border-top: 0.1vh solid;
+    display: block;
+    min: 100%;
+    margin: 0;
+    padding: 1vh;
+    font-size: 1.2vw;
+    cursor: pointer;
+    text-align: left;
+    font-family: Arial;
+}
+
+.komisjaCheckboxElement input + label + label {
+    display: block;
+    min: 100%;
+    margin: 0;
+    padding: 1vh;
+    font-size: 1vw;
+    cursor: pointer;
+    text-align: left;
+    font-family: Arial;
+}
+
+.komisjaCheckboxElement input:hover ~ label {
+    background-color: rgb(200, 200, 200);
+}
+
+.komisjaCheckboxElement input:checked ~ label {
+    background-color: rgb(140, 140, 140);
+}
+
+.komisjaCheckboxList {
+    overflow-y: auto;
+    height: 60vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+}
+
+.komisjaRadioElement input {
+    border-top: 0.1vh solid;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    min-width: 100%;
+    margin: 0;
+    padding: 1vh;
+    font-size: 1.2vw;
+    cursor: pointer;
+    text-align: left;
+}
+
+.komisjaRadioElement input + label {
+    display: block;
+    min: 100%;
+    margin: 0;
+    padding: 1vh;
+    font-size: 1vw;
+    cursor: pointer;
+    text-align: left;
+    font-family: Arial;
+}
+
+.komisjaRadioElement input:hover + label {
+    background-color: rgb(200, 200, 200);
+}
+
+#komisjaDodajHospitacjeButton {
+    background-color: rgb(200, 200, 200);
+    display: block;
+    position: absolute;
+    bottom: 3vh;
+    left: 5vw;
+    width: 10vw;
+    height: 8vh;
+    border-radius: 0.5vh;
+    border-style: solid;
+    border-width: 0.3vh;
+    border-color: rgb(100, 100, 100);
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+
+#komisjaPowrotButton {
+    background-color: rgb(200, 200, 200);
+    display: block;
+    position: absolute;
+    bottom: 3vh;
+    right: 5vw;
+    width: 10vw;
+    height: 8vh;
+    border-radius: 0.5vh;
+    border-style: solid;
+    border-width: 0.3vh;
+    border-color: rgb(100, 100, 100);
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+
+#komisjaHeader {
+    margin: 0;
+    padding: 1vh;
+    font-size: 1vw;
+    text-align: center;
+}
